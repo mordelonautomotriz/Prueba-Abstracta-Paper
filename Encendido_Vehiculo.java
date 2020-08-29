@@ -12,8 +12,8 @@ abstract class Bobina_Encendido{
     public Bobina_Encendido(float tension_referencia) {
         tension_referencia=(float) 5.0;
     } 
+public Bobina_Encendido(int codigo_bobina_1_2, int codigo_bobina_3_4, float tension_1_2, float tension_3_4, float tension_referencia, String diagnostico){
     
-    public Bobina_Encendido(int codigo_bobina_1_2, int codigo_bobina_3_4, float tension_1_2, float tension_3_4, float tension_referencia, String diagnostico) {
         this.codigo_bobina_1_2 = codigo_bobina_1_2;
         this.codigo_bobina_3_4 = codigo_bobina_3_4;
         this.tension_1_2 = tension_1_2;
@@ -74,8 +74,12 @@ abstract class Bobina_Encendido{
    class TensionBobina extends Bobina_Encendido{
        private float diferencia_tension; 
        
-       public TensionBobina(int codigo_bobina_1_2, int codigo_bobina_3_4, float tension_1_2, float tension_3_4, float tension_referencia, String diagnostico,float diferencia_tension){
-        super(codigo_bobina_1_2, codigo_bobina_3_4, tension_1_2, tension_3_4, tension_referencia, diagnostico);
+public TensionBobina(int codigo_bobina_1_2, int codigo_bobina_3_4, float tension_1_2, 
+float tension_3_4, float tension_referencia, String diagnostico,float diferencia_tension){
+
+        super(codigo_bobina_1_2, codigo_bobina_3_4, tension_1_2, tension_3_4, 
+        tension_referencia, diagnostico);
+        
         TensionBobina.super.setTension_referencia(tension_referencia);
         setDiferencia_tension(diferencia_tension);
     }
@@ -91,22 +95,26 @@ abstract class Bobina_Encendido{
        
     public void DeterminarTension(){
      if (getTension_1_2()>getTension_referencia()){
-         TensionBobina.super.setDiagnostico(" Revisar la linea de de alimentacion.");
-         System.out.println("______________________________________");
-         System.out.println("El cuerpo de bobinas [1-2] con codigo: "+getCodigo_bobina_1_2()+" Presenta una tension"
-         +" \n mas elevada del rango de trabajo normal."+" Diagnostico: "+getDiagnostico());    
+TensionBobina.super.setDiagnostico(" Revisar la linea de de alimentacion.");
+System.out.println("______________________________________");
+System.out.println("El cuerpo de bobinas [1-2] con codigo: "
+        + ""+getCodigo_bobina_1_2()+" Presenta una tension"
++" \n mas elevada del rango de trabajo normal."+" Diagnostico: "+getDiagnostico());    
      }else{
-          System.out.println("______________________________________");
-         System.out.println("El cuerpo de bobinas [1-2] con codigo: "+getCodigo_bobina_1_2()+" Funciona normalmente");
+System.out.println("______________________________________");
+System.out.println("El cuerpo de bobinas [1-2] con codigo: "
+        + ""+getCodigo_bobina_1_2()+" Funciona normalmente");
      }
      if (getTension_3_4()>getTension_referencia()){
          TensionBobina.super.setDiagnostico(" Revisar la linea de de alimentacion.");
          System.out.println("______________________________________");
-         System.out.println("El cuerpo de bobinas [3-4] con codigo: "+getCodigo_bobina_3_4()+" Presenta una tension"
-         +" \n mas elevada del rango de trabajo normal."+" Diagnostico: "+getDiagnostico());    
+System.out.println("El cuerpo de bobinas [3-4] con codigo: "
+        + ""+getCodigo_bobina_3_4()+" Presenta una tension"
+        +" \n mas elevada del rango de trabajo normal."+" Diagnostico: "+getDiagnostico());    
      }else{
          System.out.println("______________________________________");
-         System.out.println("El cuerpo de bobinas [3-4] con codigo: "+getCodigo_bobina_3_4()+" Funciona normalmente");
+         System.out.println("El cuerpo de bobinas [3-4] con codigo: "
+                 + ""+getCodigo_bobina_3_4()+" Funciona normalmente");
             }    
         }
     
@@ -127,10 +135,7 @@ class Motor extends Bobina_Encendido{
         this.tipo_motor = tipo_motor;
     }
     public void DeterminarMotor(){
-        System.out.println("______________________________________");
-        System.out.println("El motor modelo: "+getTipo_motor()+" tiene una tension de referencia de: "
-        +getTension_referencia()+" Voltios en la señal de la bobina.");
-        System.out.println("______________________________________");
+        
     }
     
 }
@@ -169,8 +174,6 @@ public class Encendido_Vehiculo {
         vehiculo.setCodigo_bobina_3_4(codigo_3_4);
         vehiculo.setTension_3_4(t_3_4);
         tension.DeterminarTension();
-        motor1.DeterminarMotor();
-       
-    }
-    
+        motor1.DeterminarMotor();      
+    }   
 }
